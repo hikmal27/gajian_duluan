@@ -10,22 +10,19 @@
         ?>
             <ul class="nav">
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/tad/inputpengajuan">
-                    <i class="material-icons">dashboard</i>
-                    <p>Input Pengajuan</p>
+                    <a class="nav-link bg-primary" href="/tad/inputpengajuan">
+                    <p class="text-white text-center">Input Pengajuan</p>
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="/tad/history">
-                    <i class="material-icons">content_paste</i>
-                    <p>History Pengajuan</p>
+                    <a class="nav-link bg-primary" href="/tad/history">
+                    <p class="text-white text-center">History Pengajuan</p>
                     </a>
                 </li>
                 
                 <li class="nav-item ">
-                    <a class="nav-link" href="/tad/status">
-                    <i class="material-icons">history</i>  
-                    <p>Status Pengajuan</p>
+                    <a class="nav-link bg-primary" href="/tad/status">
+                    <p class="text-white text-center">Status Pengajuan</p>
                     </a>
                 </li>
             

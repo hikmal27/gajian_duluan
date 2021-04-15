@@ -13,6 +13,7 @@
                     <table class="table">
                         <thead>
                             <tr>
+                            <th>NO</th>
                             <th>SIMID</th>
                             <th>NAMA</th>
                             <th>TANGGAL</th>
@@ -22,18 +23,22 @@
                             </tr>
                         </thead>
                         <tbody>
+
+                            <?php $i = 1; ?> 
                             @foreach ($data_disetujui as $disetujui)
                                 <tr>
+                                    <td>{{ $i }}</td>
                                     <td>{{ $disetujui->ID_EMP }}</td>
                                     <td>{{ $disetujui->NAMA }}</td>
                                     <td>{{ $disetujui->TANGGAL_PINJAM }}</td>
                                     <td>{{ $disetujui->NOMINAL_PINJAM }}</td>
                                     <td>{{ $disetujui->STATUS }}</td>
                                     <td>
-                                        <a class="btn btn-success btn-md" href="/admin/cair/<?php echo $disetujui->ID ?>">cair</a>
+                                        <a class="btn btn-success btn-sm" href="/admin/cair/<?php echo $disetujui->ID ?>">cair</a>
                                     </td>
                                     
                                 </tr>
+                            <?php $i++; ?>
                             @endforeach
                         </tbody>
                     </table>            

@@ -12,14 +12,17 @@
                     <thead>
                     <tr>
                         <th>NO</th>
+                        <th>SIMID</th>
                         <th>TANGGAL</th>
                         <th>NOMINAL</th>
                         <th>STATUS</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <?php $i = 1; ?>
                     @foreach ( $data_history as $data )
                         <tr>
+                            <td class="text-lg">{{ $i }}</td>
                             <td class="text-lg">{{ $data->ID_EMP }}</td>
                             <td class="text-lg">{{ $data->TANGGAL_PINJAM }}</td>
                             <td class="text-lg">{{ $data->NOMINAL_PINJAM }}</td>
@@ -41,6 +44,7 @@
                                 @endif
                             </td>
                         </tr>
+                        <?php $i++; ?>
                     @endforeach
                     </tbody>
                 </table>

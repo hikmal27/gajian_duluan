@@ -49,4 +49,23 @@ class BMController extends Controller
 
         return view('BM.history', ['datauser' => $datauser]);
     }
+
+    public function persetujuan(Request $request) 
+    {
+        $id = $request->id;
+        
+        date_default_timezone_set("Asia/Bangkok");
+        $datetime = date("y-m-d h:i:s");
+
+        $jum = count($id);
+
+        $users = DB::connection('mysql_local')->table('tbl_pinjam')
+                    ->whereIn('id', $id)
+                    ->update([
+                        'STATUS' => '1',
+                        'TANGGAL_ACC_ADMIN' => $datetime
+                    ]);
+
+        return redirect('/bm/listpengajuan');
+    }
 }

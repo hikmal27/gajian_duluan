@@ -11,7 +11,8 @@ class AdminController extends Controller
     public function listpengajuan()
     {
         $id = Session::get('emp_id');
-        $data_pinjam = DB::connection('mysql_local')->table('tbl_pinjam')->get();
+        $data_pinjam = DB::connection('mysql_local')->table('tbl_pinjam')->where('tbl_pinjam.STATUS', '<>', '5')->where('tbl_pinjam.STATUS', '<>', '6')->where('tbl_pinjam.STATUS', '<>', '10')->get();
+        // $data_pinjam = DB::connection('mysql_local')->table('tbl_pinjam')->get();
 
         return view('ADMIN.listpengajuan', ['data_pinjam' => $data_pinjam]);
     }
@@ -79,5 +80,66 @@ class AdminController extends Controller
         ]);
 
         return redirect('/admin/disetujuiadmin'); 
+    }
+
+    public function persetujuan(Request $request) 
+    {
+        $id = $request->id;
+        
+        date_default_timezone_set("Asia/Bangkok");
+        $datetime = date("y-m-d h:i:s");
+
+        $jum = count($id);
+        // dd($id);
+
+        $users = DB::connection('mysql_local')->table('tbl_pinjam')
+                    ->whereIn('id', $id)
+                    ->update([
+                        'STATUS' => '5',
+                        'TANGGAL_ACC_ADMIN' => $datetime
+                    ]);
+
+        return redirect('/admin/listpengajuan');
+    }
+
+    public function penolakan(Request $request) 
+    {
+        $id = $request->id;
+        
+        date_default_timezone_set("Asia/Bangkok");
+        $datetime = date("y-m-d h:i:s");
+
+        $jum = count($id);
+
+        $users = DB::connection('mysql_local')->table('tbl_pinjam')
+                    ->whereIn('id', $id)
+                    ->update([
+                        'STATUS' => '10',
+                        'TANGGAL_ACC_ADMIN' => $datetime
+                    ]);
+
+        return redirect('/admin/listpengajuan');
+    }
+
+    public function filter(Request $request)
+    {
+        $status = $request->filter;
+
+        
+
+        if( $status == 4 ) {
+            $data_pinjam = DB::connection('mysql_local')->table('tbl_pinjam')
+                            ->where('tbl_pinjam.STATUS', '<>', '5')
+                            ->where('tbl_pinjam.STATUS', '<>', '6')
+                            ->where('tbl_pinjam.STATUS', '<>', '10')
+                            ->get();
+            return view('ADMIN.listpengajuan', ['data_pinjam' => $data_pinjam]);
+        } else {
+            $data_pinjam = DB::connection('mysql_local')->table('tbl_pinjam')->where('STATUS', $status)->get();
+            return view('ADMIN.listpengajuan', ['data_pinjam' => $data_pinjam]);
+        }
+
+
+        
     }
 }
